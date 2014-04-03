@@ -30,7 +30,7 @@ jQuery.fn.bullseye = function (settings, viewport) {
 
                 scrollTop = $viewport.scrollTop(),
                 scrollLeft = $viewport.scrollLeft(),
-                scrollRight = scrollLeft + elementWidth,
+                scrollRight = scrollLeft + viewportWidth,
                 scrollBottom = scrollTop + viewportHeight,
 
                 x1 = $element.offset().left,
@@ -59,11 +59,12 @@ jQuery.fn.bullseye = function (settings, viewport) {
             // Evaluate if the target is inside the viewport
             if (
                 (scrollBottom < y1 || (settings.extendDown ? false : scrollTop > y2)) ||
-                (scrollRight < x1 || scrollRight > x2)
-            )
+                (scrollRight < x1 || scrollLeft > x2)
+            ) {
                 outsideViewport();
-            else
+            } else {
                 insideViewport();
+            }
         };
 
         $viewport
